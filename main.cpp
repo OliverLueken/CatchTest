@@ -2,3 +2,4 @@
 
 #include "catch.hpp"
 #include "tests.cpp"
+#include "exceptionTests.cpp"
