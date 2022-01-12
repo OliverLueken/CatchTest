@@ -1,4 +1,5 @@
 #include "catch.hpp"
+#include <vector>
 
 TEST_CASE("test case name"){
     REQUIRE(6*9 == 42); //fails
@@ -20,4 +21,22 @@ TEST_CASE( "Matchers can be composed with both && and ||",
            "[matchers][operators][operator||][operator&&]"){
     CHECK_THAT( testStringForMatching(),
         ( Contains("string") || Contains("different") ) && Contains("substring") );
+}
+
+TEST_CASE( "Testing a vector", "[vector]" ){
+    std::vector<int> v{1, 3};
+    SECTION( "Contains (element)" ){
+        CHECK_THAT( v, VectorContains(1) );
+        CHECK_THAT( v, VectorContains(2) );
+    }
+    std::vector<int> v2{1};
+    std::vector<int> empty{};
+    SECTION( "Contains (vector)" ){
+        CHECK_THAT( v, Contains(v2) );
+        v2.push_back(3);
+        CHECK_THAT( v, Contains(v2) );
+
+        CHECK_THAT( v, Contains(emtpy) );
+        CHECK_THAT( empty, Contains(emtpy) );
+    }
 }
