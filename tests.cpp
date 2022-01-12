@@ -15,3 +15,9 @@ TEST_CASE("String matchers", "[matchers]"){
     CHECK_THAT(   testStringForMatching(), StartsWith( "this"      ) );
     CHECK_THAT(   testStringForMatching(), EndsWith  ( "substring" ) );
 }
+
+TEST_CASE( "Matchers can be composed with both && and ||",
+           "[matchers][operators][operator||][operator&&]"){
+    CHECK_THAT( testStringForMatching(),
+        ( Contains("string") || Contains("different") ) && Contains("substring") );
+}
