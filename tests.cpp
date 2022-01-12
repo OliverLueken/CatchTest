@@ -27,16 +27,18 @@ TEST_CASE( "Testing a vector", "[vector]" ){
     std::vector<int> v{1, 3};
     SECTION( "Contains (element)" ){
         CHECK_THAT( v, VectorContains(1) );
-        CHECK_THAT( v, VectorContains(2) );
+        CHECK_THAT( v, VectorContains(2) ); //fails
     }
     std::vector<int> v2{1};
     std::vector<int> empty{};
     SECTION( "Contains (vector)" ){
         CHECK_THAT( v, Contains(v2) );
-        v2.push_back(3);
+        v2.push_back(3); //now v == v2
         CHECK_THAT( v, Contains(v2) );
+        v2.push_back(2); //now v < v2
+        CHECK_THAT( v, Contains(v2) ); //fails
 
-        CHECK_THAT( v, Contains(emtpy) );
-        CHECK_THAT( empty, Contains(emtpy) );
+        CHECK_THAT( v, Contains(empty) );
+        CHECK_THAT( empty, Contains(empty) );
     }
 }
