@@ -10,12 +10,14 @@ inline const char* testStringForMatching(){
 }
 using namespace Catch::Matchers;
 TEST_CASE("String matchers", "[matchers]"){
-    REQUIRE_THAT( testStringForMatching(), Contains( "string" ) );
-    CHECK_THAT  ( testStringForMatching(), Contains( "abc"    ) );
+    REQUIRE_THAT( testStringForMatching(), Contains( "string" ) ); //require aborts test on failure
+    CHECK_THAT  ( testStringForMatching(), Contains( "abc"    ) ); //check carries on even on failure
 
-    CHECK_THAT(   testStringForMatching(), StartsWith( "this"      ) );
-    CHECK_THAT(   testStringForMatching(), EndsWith  ( "substring" ) );
+    CHECK_THAT( testStringForMatching(), StartsWith( "this"      ) );
+    CHECK_THAT( testStringForMatching(), EndsWith  ( "substring" ) );
 }
+
+
 
 TEST_CASE( "Matchers can be composed with both && and ||",
            "[matchers][operators][operator||][operator&&]"){
@@ -23,19 +25,22 @@ TEST_CASE( "Matchers can be composed with both && and ||",
         ( Contains("string") || Contains("different") ) && Contains("substring") );
 }
 
-TEST_CASE( "Testing a vector", "[vector]" ){
+
+
+TEST_CASE( "Testing what elements a vector contains", "[vector]" ){
     std::vector<int> v{1, 3};
     SECTION( "Contains (element)" ){
         CHECK_THAT( v, VectorContains(1) );
         CHECK_THAT( v, VectorContains(2) ); //fails
     }
+
     std::vector<int> v2{1};
     std::vector<int> empty{};
     SECTION( "Contains (vector)" ){
-        CHECK_THAT( v, Contains(v2) );
+        CHECK_THAT( v, Contains(v2) ); //check if v contains every element of v2
         v2.push_back(3); //now v == v2
         CHECK_THAT( v, Contains(v2) );
-        v2.push_back(2); //now v < v2
+        v2.push_back(2); //now v.size() < v2.size()
         CHECK_THAT( v, Contains(v2) ); //fails
 
         CHECK_THAT( v, Contains(empty) );
