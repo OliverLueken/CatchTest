@@ -1,7 +1,5 @@
 #include "catch.hpp"
 
-//#ifdef __cpp_structured_bindings
-
 TEST_CASE( "strlen", "[approvals]" ){
     auto [test_input, expected] = GENERATE( values<std::pair<std::string_view, size_t>>({
         {"one", 3},
@@ -23,7 +21,7 @@ TEST_CASE( "strlen2", "[approvals]" ){
     REQUIRE( test_input.size() == expected );
 }
 
-//
+//another alternative
 struct Data{ std::string str; size_t len;};
 
 TEST_CASE( "strlen3" ){
