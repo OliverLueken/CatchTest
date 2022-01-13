@@ -14,3 +14,4 @@ by Phil Nash, cppcon 2018
 #include "exceptionTests.cpp"
 #include "generators.cpp"
 #include "pair_table_values.cpp"
+#include "random.cpp"
