@@ -12,3 +12,4 @@ by Phil Nash, cppcon 2018
 #include "tests.cpp"
 #include "exceptionTests.cpp"
 #include "generators.cpp"
+#include "pair_table_values.cpp"
