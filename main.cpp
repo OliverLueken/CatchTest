@@ -9,7 +9,8 @@ by Phil Nash, cppcon 2018
 #define CATCH_CONFIG_MAIN //writes main for us
 
 #include "catch.hpp"
-#include "tests.cpp"
+
+#include "matchers.cpp"
 #include "exceptionTests.cpp"
 #include "generators.cpp"
 #include "pair_table_values.cpp"
