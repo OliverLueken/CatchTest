@@ -1,5 +1,7 @@
 #include "catch.hpp"
 
+#include <vector>
+#include <string>
 
 TEMPLATE_TEST_CASE( "vectors can be sized and resized", "[vector][template]", int, std::string, (std::tuple<int,float>) ) {
 
