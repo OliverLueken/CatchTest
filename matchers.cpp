@@ -1,6 +1,13 @@
 #include "catch.hpp"
 #include <vector>
 
+/*
+REQUIRE_THAT( lhs, matcher expression)
+  CHECK_THAT( lhs, matcher expression)
+
+matchers can be composed with &&, || and !
+*/
+
 TEST_CASE("test case name"){
     REQUIRE(6*9 == 42); //fails
 }
