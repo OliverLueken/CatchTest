@@ -48,18 +48,6 @@ TEST_CASE("throwing"){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 //My own exception
 class SpecialException : public std::exception{
 public:
