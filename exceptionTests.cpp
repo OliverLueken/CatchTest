@@ -28,14 +28,14 @@ REQUIRE_THROWS_WITH(expression, string or string matcher)
 auto notThrowing(){}
 auto throwing(){ throw "exception"; }
 
-TEST_CASE("not throwing"){
+TEST_CASE("not throwing", "[exceptions]"){
     REQUIRE_NOTHROW( notThrowing() );
     CHECK_NOTHROW( notThrowing() );
     CHECK_NOTHROW( throwing() ); //fails
 }
 
 
-TEST_CASE("throwing"){
+TEST_CASE("throwing", "[exceptions][!throws]"){
     REQUIRE_THROWS( throwing() );
     CHECK_THROWS( throwing() );
     CHECK_THROWS( notThrowing() ); //fails
