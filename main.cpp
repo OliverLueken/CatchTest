@@ -20,3 +20,4 @@ https://github.com/catchorg/Catch2/blob/devel/docs/Readme.md#top
 #include "given_when_then.cpp"
 #include "basics.cpp"
 #include "logger.cpp"
+#include "template_test_case.cpp"
