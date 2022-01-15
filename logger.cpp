@@ -23,13 +23,16 @@ CAPTURE( theAnswer )
 */
 
 
+//run all with
+//./a.out "[Logger]" -s
+
 /*
 prints:
 Test case start
 The number is 1
 FAILED
 */
-TEST_CASE("LoggerFoo") {
+TEST_CASE("LoggerFoo", "[Logger]") {
     INFO("Test case start");
     for (int i = 0; i < 2; ++i) {
         INFO("The number is " << i);
@@ -43,7 +46,7 @@ prints:
 Test case start
 FAILED
 */
-TEST_CASE("LoggerBar") {
+TEST_CASE("LoggerBar", "[Logger]") {
     INFO("Test case start");
     for (int i = 0; i < 2; ++i) {
         INFO("The number is " << i);
@@ -64,7 +67,7 @@ The number is 0
 The number is 1
 FAILED
 */
-TEST_CASE("UnscopedLoggerBaz") {
+TEST_CASE("UnscopedLoggerBaz", "[Logger]") {
     print_some_info();
     for (int i = 0; i < 2; ++i) {
         UNSCOPED_INFO("The number is " << i);
@@ -83,7 +86,7 @@ Second info
 Second unscoped info
 FAILED
 */
-TEST_CASE("UnscopedLoggerQux") {
+TEST_CASE("UnscopedLoggerQux", "[Logger]") {
     INFO("First info");
     UNSCOPED_INFO("First unscoped info");
     CHECK(false);
@@ -97,7 +100,7 @@ TEST_CASE("UnscopedLoggerQux") {
 This is the last warning!
 PASSES
 */
-TEST_CASE("WarningLogger"){
+TEST_CASE("WarningLogger", "[Logger]"){
     WARN("This is the last warning!");
     SUCCEED();
 }
@@ -106,7 +109,7 @@ TEST_CASE("WarningLogger"){
 You ignored the warnings, this is a fail now!
 FAILED
 */
-TEST_CASE("FailLogger"){
+TEST_CASE("FailLogger", "[Logger]"){
     FAIL("You ignored the warnings, this is a fail now!");
     SUCCEED();
 }
@@ -115,7 +118,7 @@ TEST_CASE("FailLogger"){
 This is a fail, but passes anyway
 PASSES
 */
-TEST_CASE("FailCheckLogger"){
+TEST_CASE("FailCheckLogger", "[Logger]"){
     FAIL_CHECK("This is a fail, but passes anyway?");
     SUCCEED();
 }
