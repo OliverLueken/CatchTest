@@ -6,6 +6,7 @@
 /*
 TEMPLATE_TEST_CASE( description, tags, types...)
 TEMPLATE_PRODUCT_TEST_CASE( description, tags, (templatedClass1, templatedClass2...), (templateType1, templateType2...))
+TEMPLATE_LIST_TEST_CASE( descpiption, tags, type list ) //allows reuse of the type list
 */
 
 
@@ -78,4 +79,17 @@ TestType = std::tuple<int, double, float>
 TEMPLATE_PRODUCT_TEST_CASE("Product with differing arities", "[template][product]", std::tuple, (int, (int, double), (int, double, float))) {
     TestType x;
     REQUIRE(std::tuple_size<TestType>::value >= 1);
+}
+
+
+/*
+executes test case with
+TestType = int
+TestType = char
+TestType = float
+*/
+using MyTypes = std::tuple<int, char, float>;
+TEMPLATE_LIST_TEST_CASE("Template test case with test types specified inside std::tuple", "[template][list]", MyTypes)
+{
+    REQUIRE(sizeof(TestType) > 0);
 }
