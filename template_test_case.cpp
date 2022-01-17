@@ -3,6 +3,15 @@
 #include <vector>
 #include <string>
 
+/*
+TEMPLATE_TEST_CASE( description, tags, types...)
+TEMPLATE_PRODUCT_TEST_CASE( description, tags, (type1, type2...)...)
+*/
+
+
+/*
+executes test case with TestType = int, TestType = std::string, TestType = std::tuple<int, float>
+*/
 TEMPLATE_TEST_CASE( "vectors can be sized and resized", "[vector][template]", int, std::string, (std::tuple<int,float>) ) {
 
     std::vector<TestType> v( 5 );
@@ -35,4 +44,19 @@ TEMPLATE_TEST_CASE( "vectors can be sized and resized", "[vector][template]", in
         REQUIRE( v.size() == 5 );
         REQUIRE( v.capacity() >= 5 );
     }
+}
+
+template< typename T>
+struct Foo {
+    size_t size() {
+        return 0;
+    }
+};
+
+/*
+executes test case with TestType = std::vector<int>, TestType = std::vector<float>, TestType = Foo<int>, TestType = Foo<float>
+*/
+TEMPLATE_PRODUCT_TEST_CASE("A Template product test case", "[template][product]", (std::vector, Foo), (int, float)) {
+    TestType x;
+    REQUIRE(x.size() == 0);
 }
