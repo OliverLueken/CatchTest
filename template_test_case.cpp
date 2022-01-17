@@ -5,7 +5,7 @@
 
 /*
 TEMPLATE_TEST_CASE( description, tags, types...)
-TEMPLATE_PRODUCT_TEST_CASE( description, tags, (Container1, Container2...), (type1, type2...))
+TEMPLATE_PRODUCT_TEST_CASE( description, tags, (templatedClass1, templatedClass2...), (templateType1, templateType2...))
 */
 
 
