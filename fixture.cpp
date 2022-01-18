@@ -84,3 +84,32 @@ TEMPLATE_PRODUCT_TEST_CASE_METHOD(Template_Template_Fixture, "A TEMPLATE_PRODUCT
             REQUIRE( Template_Template_Fixture<TestType>::m_a.size() == 0 );
 }
 
+
+
+ template <int V>
+ struct Nttp_Fixture{
+     int value = V;
+ };
+
+ TEMPLATE_TEST_CASE_METHOD_SIG(Nttp_Fixture, "A TEMPLATE_TEST_CASE_METHOD_SIG based test run that succeeds", "[class][template][nttp][fixture]",
+        ((int V), V), 1, 3, 6) {
+     REQUIRE(Nttp_Fixture<V>::value > 0);
+ }
+
+ template<typename T>
+ struct Template_Fixture_2 {
+     Template_Fixture_2() {}
+
+     T m_a;
+ };
+
+ template< typename T, size_t V>
+ struct Template_Foo_2 {
+     size_t size() { return V; }
+ };
+
+ TEMPLATE_PRODUCT_TEST_CASE_METHOD_SIG(Template_Fixture_2, "A TEMPLATE_PRODUCT_TEST_CASE_METHOD_SIG based test run that succeeds", "[class][template][product][nttp][fixture]", 
+        ((typename T, size_t S), T, S),(std::array, Template_Foo_2), ((int,2), (float,6)))
+ {
+     REQUIRE(Template_Fixture_2<TestType>{}.m_a.size() >= 2);
+ }
