@@ -3,8 +3,12 @@
 /*
 https://github.com/catchorg/Catch2/blob/devel/docs/generators.md#top
 
-GENERATE( val1, val2... )
 //runs test case once for each value
+GENERATE( val1, val2... )
+//No variables useable for generate because generators outlive scope
+//if necessare use, but be carefull
+GENERATE_COPY(...)
+GENERATE_REF(...)
 
 Generators
     SingleValueGenerator<T>
@@ -36,6 +40,9 @@ Helper functions
     range(Arithmetic start, Arithmetic end, Arithmetic step)    for RangeGenerator<Arithmetic> with a custom step size
     from_range(InputIterator from, InputIterator to)            for IteratorGenerator<T>
     from_range(Container const&)                                for IteratorGenerator<T>
+
+//also possible, first argument for GENERATOR converts arguments:
+as<type>
 */
 
 
