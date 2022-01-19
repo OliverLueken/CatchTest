@@ -1,5 +1,7 @@
 #include "catch.hpp"
 
+#include <string>
+
 /*
 CHECKED_IF( expr ) { ... }      //executes block if expr is true
 CHECKED_ELSE( expr ) { ... }    //executes block if expr is false
@@ -10,6 +12,8 @@ SUCCEED( msg )
 STATIC_REQUIRE  //checks at compile time
 STATIC_CHECK
 CATCH_CONFIG_RUNTIME_STATIC_REQUIRE     //define to deferre check to runtime
+
+METHOD_AS_TEST_CASE( memberFunctionPointer, description, tags )
 */
 
 
@@ -37,3 +41,29 @@ TEST_CASE("STATIC_REQUIRE showcase", "[traits][macro]") {
     STATIC_REQUIRE( std::is_void<void>::value );
     STATIC_REQUIRE_FALSE( std::is_void<int>::value );
 }
+
+/*
+STATIC_CHECK not declared
+TEST_CASE("STATIC_CHECK showcase", "[traits][macro]") {
+    STATIC_CHECK( std::is_void<void>::value );
+    STATIC_CHECK_FALSE( std::is_void<int>::value );
+}
+*/
+
+
+
+class TestClass {
+    std::string s;
+
+public:
+    TestClass()
+        :s( "hello" )
+    {}
+
+    void testCase() {
+        REQUIRE( s == "hello" );
+    }
+};
+
+
+METHOD_AS_TEST_CASE( TestClass::testCase, "Use class's method as a test case", "[class][macro]" )
