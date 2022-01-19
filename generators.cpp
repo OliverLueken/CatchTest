@@ -1,8 +1,41 @@
 #include "catch.hpp"
 
 /*
+https://github.com/catchorg/Catch2/blob/devel/docs/generators.md#top
+
 GENERATE( val1, val2... )
 //runs test case once for each value
+
+Generators
+    SingleValueGenerator<T>
+    FixedValuesGenerator<T>
+
+    FilterGenerator<T, Predicate>       //filters out elements from a generator for which a predicate returns false
+    TakeGenerator<T>                    //test first n elements from a generator
+    RepeatGenerator<T>                  //repeats output from a generator n times
+    MapGenerator<T, U, Func>            //applies func on elements from a generator
+    ChunkGenerator<T>                   //chunks of n elements from a generator (in a vector)
+
+    RandomIntegerGenerator<Integral>    //random integrals from a range
+    RandomFloatGenerator<Float>         //random floats from a range
+    RangeGenerator<T>(first, last)      //all values inside a range [first, last)
+    IteratorGenerator<T>                //copies and returns values from an iterator range
+
+Helper functions
+    value(T&&)                                                  for SingleValueGenerator<T>
+    values(std::initializer_list<T>)                            for FixedValuesGenerator<T>
+    table<Ts...>(std::initializer_list<std::tuple<Ts...>>)      for FixedValuesGenerator<std::tuple<Ts...>>
+    filter(predicate, GeneratorWrapper<T>&&)                    for FilterGenerator<T, Predicate>
+    take(count, GeneratorWrapper<T>&&)                          for TakeGenerator<T>
+    repeat(repeats, GeneratorWrapper<T>&&)                      for RepeatGenerator<T>
+    map(func, GeneratorWrapper<T>&&)                            for MapGenerator<T, U, Func> (map U to T, deduced from Func)
+    map<T>(func, GeneratorWrapper<U>&&)                         for MapGenerator<T, U, Func> (map U to T)
+    chunk(chunk-size, GeneratorWrapper<T>&&)                    for ChunkGenerator<T>
+    random(IntegerOrFloat a, IntegerOrFloat b)                  for RandomIntegerGenerator or RandomFloatGenerator
+    range(Arithemtic start, Arithmetic end)                     for RangeGenerator<Arithmetic> with a step size of 1
+    range(Arithmetic start, Arithmetic end, Arithmetic step)    for RangeGenerator<Arithmetic> with a custom step size
+    from_range(InputIterator from, InputIterator to)            for IteratorGenerator<T>
+    from_range(Container const&)                                for IteratorGenerator<T>
 */
 
 
@@ -90,4 +123,17 @@ TEST_CASE("Complex mix of sections and generates", "[generators]") {
     }
     auto k = GENERATE(5, 6);
     SUCCEED("C(" + std::to_string(j) + ')' );
+}
+
+
+/*
+example with take, filter, random
+*/
+TEST_CASE("Generating random ints", "[example][generator]") {
+    SECTION("Deducing functions") {
+        auto i = GENERATE(take(100, filter([](int i) { return i % 2 == 1; }, random(-100, 100))));
+        REQUIRE(i > -100);
+        REQUIRE(i < 100);
+        REQUIRE(i % 2 == 1);
+    }
 }
