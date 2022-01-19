@@ -41,7 +41,7 @@ i=2, k=4
 i=2, k=5
 i=2, k=6
 */
-TEST_CASE("Generators") {
+TEST_CASE("Generators2") {
     auto i = GENERATE(1, 2);
     SECTION("one") {
         auto j = GENERATE(-3, -2);
