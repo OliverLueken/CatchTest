@@ -6,14 +6,14 @@ GENERATE( val1, val2... )
 */
 
 
-TEST_CASE( "10x10 ints" ){
+TEST_CASE( "10x10 ints", "[generators]" ){
     auto x = GENERATE( range(1,11) );
     auto y = GENERATE( range(101,111) );
 
     CHECK( x<y );
 }
 
-TEST_CASE("Generators"){
+TEST_CASE("Generators", "[generators]"){
     auto i = GENERATE( as<std::string>(), "a", "b", "c");
 
     SECTION("one"){
@@ -41,7 +41,7 @@ i=2, k=4
 i=2, k=5
 i=2, k=6
 */
-TEST_CASE("Generators2") {
+TEST_CASE("Generators2", "[generators]") {
     auto i = GENERATE(1, 2);
     SECTION("one") {
         auto j = GENERATE(-3, -2);
