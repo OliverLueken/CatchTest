@@ -16,6 +16,8 @@ CATCH_CONFIG_RUNTIME_STATIC_REQUIRE     //define to deferre check to runtime
 METHOD_AS_TEST_CASE( memberFunctionPointer, description, tags )     //calls object method as test
 
 REGISTER_TEST_CASE( function, description, tags )   //calls function void() as test
+
+DYNAMIC_SECTION( msg )     //SECTION where the user can use operator<< to create the final name for that section
 */
 
 
@@ -77,3 +79,15 @@ void testCase() {
     REQUIRE( s == "hello" );
 }
 REGISTER_TEST_CASE( testCase, "Use function as a test case", "[macro]" )
+
+
+
+TEST_CASE( "looped SECTION tests", "[macro]" ) {
+    int a = 1;
+
+    for( int b = 0; b < 10; ++b ) {
+        DYNAMIC_SECTION( "b is currently: " << b ) {
+            CHECK( b > a );
+        }
+    }
+}
