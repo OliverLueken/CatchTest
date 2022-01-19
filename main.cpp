@@ -22,3 +22,4 @@ https://github.com/catchorg/Catch2/blob/devel/docs/Readme.md#top
 #include "logger.cpp"
 #include "template_test_case.cpp"
 #include "fixture.cpp"
+#include "reporters.cpp"
