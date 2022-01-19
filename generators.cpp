@@ -52,3 +52,42 @@ TEST_CASE("Generators2", "[generators]") {
         REQUIRE(i != k);
     }
 }
+
+
+
+/*
+runs first section once
+the second section twice
+*/
+TEST_CASE("GENERATE between SECTIONs", "[generators]") {
+    SECTION("first") { REQUIRE(true); }
+    auto _ = GENERATE(1, 2);
+    SECTION("second") { REQUIRE(true); }
+}
+
+
+
+/*
+reports 14 assertions
+A(1),           C(5),
+        B(3),   C(6),
+        B(4),   C(5),
+                C(6),
+A(2),           C(5),
+        B(3),   C(6),
+        B(4),   C(5),
+                C(6),
+
+*/
+TEST_CASE("Complex mix of sections and generates", "[generators]") {
+    auto i = GENERATE(1, 2);
+    SECTION("A") {
+        SUCCEED("A(" + std::to_string(i) + ')' );
+    }
+    auto j = GENERATE(3, 4);
+    SECTION("B") {
+        SUCCEED("B(" + std::to_string(j) + ')' );
+    }
+    auto k = GENERATE(5, 6);
+    SUCCEED("C(" + std::to_string(j) + ')' );
+}
