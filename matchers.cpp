@@ -72,8 +72,9 @@ TEST_CASE( "Testing what elements a vector contains", "[vector]" ){
 
 TEST_CASE( "Predicate matcher test", "[matchers][predicate]" ){
     REQUIRE_THAT("Hello olleH",
-                 Predicate<std::string>(
-                     [] (std::string const& str) -> bool { return str.front() == str.back(); },
-                     "First and last character should be equal")
+        Predicate<std::string>(
+            [] (std::string const& str) -> bool { return str.front() == str.back(); },
+            "First and last character should be equal"
+        )
     );
 }
