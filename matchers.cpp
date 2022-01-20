@@ -6,18 +6,27 @@ REQUIRE_THAT( lhs, matcher expression)
   CHECK_THAT( lhs, matcher expression)
 
 //string matchers
-StartsWith(string, CaseSEnsitive)
-EndsWith(string, CaseSEnsitive)
-ContainsSubstring(string, CaseSEnsitive)
-Equals(string, CaseSEnsitive)
-Matches(string, CaseSEnsitive)
+StartsWith( string, CaseSEnsitive )
+EndsWith( string, CaseSEnsitive )
+ContainsSubstring( string, CaseSEnsitive )
+Equals( string, CaseSEnsitive )
+Matches( string, CaseSEnsitive )
 
 //Floating point matchers
-WithinAbs(double target, double margin)
-WithinULP(floatingPoint target, uint64_t maxUlpDiff)
-WithinRel(floatingPoint target, floatingPoint eps)
+WithinAbs( double target, double margin )
+WithinULP( floatingPoint target, uint64_t maxUlpDiff )
+WithinRel( floatingPoint target, floatingPoint eps )
 
 Predicate<T>( callable pred, std::string description )
+
+REQUIRE_THROWS_MATCHES( expr, ExceptionType, Matcher )
+
+//Range matchers
+IsEmpty()
+SizeIs( size_t target_size )
+SizeIs( Matcher size_matcher )
+Contains( T&& target_element, Comparator = std::equal_to<>{} )
+Contains( Matcher element_matcher )
 
 matchers can be composed with &&, || and !
 */
