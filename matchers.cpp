@@ -5,6 +5,20 @@
 REQUIRE_THAT( lhs, matcher expression)
   CHECK_THAT( lhs, matcher expression)
 
+//string matchers
+StartsWith(string, CaseSEnsitive)
+EndsWith(string, CaseSEnsitive)
+ContainsSubstring(string, CaseSEnsitive)
+Equals(string, CaseSEnsitive)
+Matches(string, CaseSEnsitive)
+
+//Floating point matchers
+WithinAbs(double target, double margin)
+WithinULP(floatingPoint target, uint64_t maxUlpDiff)
+WithinRel(floatingPoint target, floatingPoint eps)
+
+Predicate<T>( callable pred, std::string description )
+
 matchers can be composed with &&, || and !
 */
 
@@ -53,4 +67,13 @@ TEST_CASE( "Testing what elements a vector contains", "[vector]" ){
         CHECK_THAT( v, Contains(empty) );
         CHECK_THAT( empty, Contains(empty) );
     }
+}
+
+
+TEST_CASE( "Predicate matcher test", "[matchers][predicate]" ){
+    REQUIRE_THAT("Hello olleH",
+                 Predicate<std::string>(
+                     [] (std::string const& str) -> bool { return str.front() == str.back(); },
+                     "First and last character should be equal")
+    );
 }
